@@ -1,42 +1,52 @@
 import { PrismaClient, Utente } from "@prisma/client";
+
 export const prisma = new PrismaClient();
 
-const all = () => prisma.utente.findMany({
+const all = () =>
+  prisma.utente.findMany({
     where: {
-        deleted: false,
-    }
+      deleted: false,
+    },
+  });
+
+const detail = (id: string) =>
+  prisma.utente.findFirst({
+    where: {
+      id,
+      deleted: false,
+    },
 });
 
-const detail = (id: string) => prisma.utente.findFirst({
-    where: {
-        id,
-        deleted: false,
-    }
-})
-
-const add = (name: string, age: number, gender: string, address: string, contact: number) => prisma.utente.create({
+const add = (
+  name: string,
+  age: string,
+  gender:string,
+  address:string,
+  contact: string,
+) =>
+  prisma.utente.create({
     data: {
-       name,
-       age,
-       gender,
-       address,
-       contact
-    }
+      name,
+      age,
+      gender,
+      address,
+      contact,
+    },
 });
 
-const remove = async (id: string) => {
-    const removeUtente = await prisma.utente.update({
-        where: { id },
-        data: {
-            deleted: true
-        },
-    });
-    return removeUtente;
-}
+const remove = (id: string) =>
+  prisma.utente.update({
+    where: { id },
+    data: {
+      deleted: true,
+    },
+});
 
-const update = (id: string, utente: Utente) => prisma.utente.update({
+const update = (id: string, utente: Utente) =>
+  prisma.utente.update({
     where: { id },
     data: utente,
-})
+});
 
-export { all, detail, add, remove, update}
+
+export { all, add, remove,update ,detail};

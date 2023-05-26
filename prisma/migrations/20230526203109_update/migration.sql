@@ -1,0 +1,3 @@
+-- AlterTable
+ALTER TABLE `utente` MODIFY `age` VARCHAR(255) NOT NULL,
+    MODIFY `contact` VARCHAR(255) NOT NULL;
