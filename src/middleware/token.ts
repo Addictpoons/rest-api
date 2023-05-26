@@ -25,7 +25,7 @@ export function verifyToken(
     });
   }
 
-  verify(token, "VerySecretKeyToSignMyLogin", async (error, payload) => {
+  verify(token, "BigSecretKey", async (error, payload) => {
     if (error) {
       return response.status(403).json({
         code: 403,
