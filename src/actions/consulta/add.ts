@@ -2,9 +2,9 @@ import { Request, Response } from "express";
 import { add } from "../../services/consulta";
 
 export default async (request: Request, response: Response) => {
-    const { date, hour, room, observations, medicoId, utenteId } = request.body;
+    const { datehour, room, observations, medicoName, utenteName } = request.body;
 
-    const newConsulta = await add (date, hour, room, observations, medicoId, utenteId)
+    const newConsulta = await add (datehour, room, observations, medicoName, utenteName)
 
     return response.json(newConsulta);
 };

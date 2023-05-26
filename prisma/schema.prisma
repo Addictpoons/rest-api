@@ -61,10 +61,10 @@ model Consulta {
   datehour     DateTime @default(now())
   room         String
   observations String?
-  utente       Utente   @relation(fields: [utenteId], references: [id])
-  utenteId     String
-  medico       Medico   @relation(fields: [medicoId], references: [id])
-  medicoId     String
+  utente       Utente   @relation(fields: [utenteName], references: [id])
+  utenteName   String
+  medico       Medico   @relation(fields: [medicoName], references: [id])
+  medicoName   String
 }
 
 // id do utente e medico na consulta para estabelecer relaçao entre utente e medico. um medico pode ter arios consutlas e diferentes pacientes e cada aciente pode ter varias consultas c/ medicos diferentes 
