@@ -1,0 +1,70 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  email     String   @unique @db.VarChar(255)
+  password  String   @db.VarChar(255)
+  deleted   Boolean  @default(false)
+  profile   Profile?
+}
+
+model Profile {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  firstName String   @db.VarChar(255)
+  lastName  String?  @db.VarChar(255)
+  userId    String   @unique
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Utente {
+  id        String     @id @default(uuid())
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  name      String     @db.VarChar(255)
+  age       Int
+  gender    String
+  address   String     @db.VarChar(255)
+  contact   Int
+  deleted   Boolean    @default(false)
+  consulta  Consulta[]
+}
+
+model Medico {
+  id            String     @id @default(uuid())
+  createdAt     DateTime   @default(now())
+  updatedAt     DateTime   @updatedAt
+  name          String     @db.VarChar(255)
+  deleted       Boolean    @default(false)
+  consulta      Consulta[]
+  especialidade String     @db.VarChar(255)
+}
+
+model Consulta {
+  id           String   @id @default(uuid())
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  deleted      Boolean  @default(false)
+  datehour     DateTime @default(now())
+  room         String
+  observations String?
+  utente       Utente   @relation(fields: [utenteId], references: [id])
+  utenteId     String
+  medico       Medico   @relation(fields: [medicoId], references: [id])
+  medicoId     String
+}
+
+// id do utente e medico na consulta para estabelecer relaçao entre utente e medico. um medico pode ter arios consutlas e diferentes pacientes e cada aciente pode ter varias consultas c/ medicos diferentes 
