@@ -4,14 +4,15 @@ import { update, detail } from "../../services/consulta";
 export default async (request: Request, response: Response) => {
   const { id } = request.params;
 
-  if (!await detail((id))) {
+  const existingConsulta = await detail(id);
+  if (!existingConsulta) {
     return response.status(404).json({
       code: 404,
       message: "Consulta não encontrada",
     });
   }
 
-  const consulta = await update((id), request.body);
+  const updatedConsulta = await update(id, request.body);
 
-  return response.json(consulta);
+  return response.json(updatedConsulta);
 };

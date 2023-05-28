@@ -5,9 +5,8 @@ const router = express.Router();
 
 router.post("", add);
 router.get("/:id", detail);
-router.get("", list );
+router.get("", list);
 router.delete("/:id", remove);
-router.put(":/id", update);
-
+router.put("/:id", update);
 
 export default router;

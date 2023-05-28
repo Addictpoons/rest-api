@@ -1,5 +1,4 @@
 import { PrismaClient, Utente } from "@prisma/client";
-
 export const prisma = new PrismaClient();
 
 const all = () =>
@@ -15,14 +14,14 @@ const detail = (id: string) =>
       id,
       deleted: false,
     },
-});
+  });
 
 const add = (
   name: string,
   age: string,
-  gender:string,
-  address:string,
-  contact: string,
+  gender: string,
+  address: string,
+  contact: string
 ) =>
   prisma.utente.create({
     data: {
@@ -32,7 +31,7 @@ const add = (
       address,
       contact,
     },
-});
+  });
 
 const remove = (id: string) =>
   prisma.utente.update({
@@ -40,13 +39,12 @@ const remove = (id: string) =>
     data: {
       deleted: true,
     },
-});
+  });
 
 const update = (id: string, utente: Utente) =>
   prisma.utente.update({
     where: { id },
     data: utente,
-});
+  });
 
-
-export { all, add, remove,update ,detail};
+export { all, add, remove, update, detail };

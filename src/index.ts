@@ -10,14 +10,20 @@ const port = process.env.PORT || 3000;
 
 app.use(express.json());
 
-const requestLogger = (request: Request, response: Response, next: NextFunction)=>{
-    console.log(`[${request.method}] => url:: ${request.url}`);
+const requestLogger = (
+  request: Request,
+  response: Response,
+  next: NextFunction
+) => {
+  console.log(`[${request.method}] => url:: ${request.url}`);
 
-    next();
-}
+  next();
+};
 
 app.use(requestLogger);
 app.use(verifyToken);
 app.use(router);
 
-app.listen(port, () => console.log(`Server listening on http://localhost:${port}`));
+app.listen(port, () =>
+  console.log(`Server listening on http://localhost:${port}`)
+);

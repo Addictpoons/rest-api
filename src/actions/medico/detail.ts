@@ -2,16 +2,16 @@ import { Request, Response } from "express";
 import { detail } from "../../services/medico";
 
 export default async (request: Request, response: Response) => {
-    const { id } = request.params;
+  const { id } = request.params;
 
-    const medico = await detail(id);
+  const medico = await detail(id);
 
-    if (!medico) {
-        return response.status(404).json({
-            code: 404,
-            message: "Medico não encontrado"
-        });
-    }
+  if (!medico) {
+    return response.status(404).json({
+      code: 404,
+      message: "Medico não encontrado",
+    });
+  }
 
-    return response.json(medico);
-}
+  return response.json(medico);
+};
